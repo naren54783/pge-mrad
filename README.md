@@ -94,21 +94,21 @@ Steps for AWS Deployment
 
   This command will deploy the application to AWS and create the necessary resources, including the Lambda functions and API Gateway.
 
-3.Configure Environment Variables:
+3. Configure Environment Variables:
 
   Set up the necessary environment variables for your Lambda functions, such as Stage, STATION_API_URL, AWS_REGION and S3_BUCKET_NAME in temaplate.yml file.
 
 4. Accessing the API
 
-	Base URL: After deployment, you will receive an API Gateway endpoint URL.
+ Base URL: After deployment, you will receive an API Gateway endpoint URL.
 
-	Testing the Endpoints: You can use tools like Postman or cURL to test the API endpoints.
+ Testing the Endpoints: You can use tools like Postman or cURL to test the API endpoints.
 
-	Example using curl to test the /api/stations/process endpoint:
+ Example using curl to test the /api/stations/process endpoint:
 
 	curl -X POST https://<api-id>.execute-api.<region>.amazonaws.com/Prod/api/stations/process \-H "Content-Type: application/json"
 
- 	Response
+  Response
 		 {
 		    "message": "File uploaded successfully - https://<baseurl>.s3.us-west-2.amazonaws.com/stations.csv"
 		}
