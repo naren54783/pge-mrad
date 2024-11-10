@@ -39,3 +39,18 @@ Installation:
 
 3.Configure AWS Credentials:
   		Update your AWS credentials (AWS_REGION, S3_BUCKET_NAME, etc.) in the config/config.js file or set environment variable
+
+Project Structure:
+
+	pge-mrad/
+	├── .aws-sam/           # AWS SAM build artifacts
+	├── .vscode/            # VS Code settings (optional)
+	├── node_modules/       # Node.js dependencies
+	├── output/             # Directory for generated files
+	├── src/                # Source code for the application
+	├── test/               # Unit and integration tests
+	├── .gitignore          # Git ignore file
+	├── package-lock.json   # Dependency lock file
+	├── package.json        # Project metadata and dependencies
+	└── template.yml        # AWS SAM template for deployment
+	    
