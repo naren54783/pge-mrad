@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Template for Station Handler Service
+Parameters:
+  S3BucketName:
+    Type: String
+    Default: pge-mrad-challenge
+    Description: "Name of the S3 bucket where the data will be stored"
+
+  StationApiUrl:
+    Type: String
+    Default: https://gbfs.divvybikes.com/gbfs/en/station_information.json
+    Description: "Station information api url"
+
+  Stage:
+    Type: String
+    Default: dev
+    Description: "define your environment"  
+
+
+Resources:
+  StationHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: pge-mrad-station-file-generator
+      Handler: src/handlers/stationsHandler.handler
+      Runtime: nodejs20.x
+      CodeUri: .
+      Timeout: 30
+      MemorySize: 256
+      Environment:
+        Variables:
+          STATION_API_URL: !Ref StationApiUrl
+          S3_BUCKET_NAME: !Ref StationUploadBucket
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref S3BucketName    
+      Events:
+        ApiGateway:
+          Type: Api
+          Properties:
+            RestApiId: !Ref StationApi  # Connect to the custom API resource
+            Path: /api/stations/process
+            Method: post
+
+  StationApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: StationHandlerApi  # Custom name for the API
+      StageName: !Ref Stage           # Define the API Gateway stage name
+      Description: "API for Station Handler Service"
+
+  StationUploadBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
