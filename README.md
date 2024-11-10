@@ -109,9 +109,9 @@ Steps for AWS Deployment
 	curl -X POST https://<api-id>.execute-api.<region>.amazonaws.com/Prod/api/stations/process \-H "Content-Type: application/json"
 
   Response
-		 {
-		    "message": "File uploaded successfully - https://<baseurl>.s3.us-west-2.amazonaws.com/stations.csv"
-		}
+	{
+	"message": "File uploaded successfully - https://<baseurl>.s3.us-west-2.amazonaws.com/stations.csv"
+	}
 
 
 
