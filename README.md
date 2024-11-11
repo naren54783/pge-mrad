@@ -115,6 +115,10 @@ Steps for AWS Deployment
 
 
 
+**** Pending Items:
+	Add a unit-test for the API call.
+ 	Optimize the app as best as possible for performance and assume your app will run in a multiprocessor or multicore environment.
+
 
 
 	    
